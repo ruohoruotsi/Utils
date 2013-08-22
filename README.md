@@ -1,4 +1,4 @@
-Utils
-=====
+### Utils
 
-Storage for various dot configuration files
+
+Various dot and configuration files resident on my machines, available for easy reference.
