@@ -2,9 +2,18 @@
 # Install ffmpeg using brew correctly
 $ brew install ffmpeg $(brew options ffmpeg --compact)
 
+
 # Decode a folder of AAC bitstreams in parallel (5 cores) over a time 
 # range (0,3000) seconds, downmixing to mono and sample-rate converting to 16kHz
 $ ls *.m4a | xargs -P 5 -I % ffmpeg -ss 0 -to 3000  -i % -ac 1 -ar 16000 %.wav
 
+# ditto, but different time-range (900,1800) and rename file more descriptively
+$ ls *.wav | xargs -P 5 -I % ffmpeg -ss 900 -to 1800  -i % -ac 1 %.trim.mono.wav
+
+
 # Demux video from audio, with a wierd name (so specifiy '--' to indicate end-of-options)
 $ ffmpeg -i -5KQ66BBWC4.mkv -vn -- out.wav
+
+
+# Sum length of audio in the current dir (and below) in H:m:s, using sox
+$ soxi -D *.wav | awk '{SUM += $1} END { printf "%d:%d:%d\n",SUM/3600,SUM%3600/60,SUM%60}'
