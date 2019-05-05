@@ -1,0 +1,6 @@
+
+# git@github.com: Permission denied (publickey)
+$ ps aux | grep ssh-agent
+$ ssh-add -K ~/.ssh/id_rsa_github
+
+
