@@ -17,3 +17,7 @@ $ ffmpeg -i -5KQ66BBWC4.mkv -vn -- out.wav
 
 # Sum length of audio in the current dir (and below) in H:m:s, using sox
 $ soxi -D *.wav | awk '{SUM += $1} END { printf "%d:%d:%d\n",SUM/3600,SUM%3600/60,SUM%60}'
+
+
+# Sum length of encoded (.m4a) audio in the current dir, in seconds, using ffmpeg
+find . -maxdepth 1 -iname '*.m4a' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; | paste -sd+ -| bc
