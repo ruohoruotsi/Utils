@@ -3,4 +3,7 @@
 $ ps aux | grep ssh-agent
 $ ssh-add -K ~/.ssh/id_rsa_github
 
-
+# remove annoying files from repo
+$ find . -name '.DS_Store' -type f -delete
+$ find . -name '*.pyc' -delete
+$ find . -type d -name "__pycache__" -delete
