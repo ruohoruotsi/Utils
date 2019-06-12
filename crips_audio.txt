@@ -21,3 +21,6 @@ $ soxi -D *.wav | awk '{SUM += $1} END { printf "%d:%d:%d\n",SUM/3600,SUM%3600/6
 
 # Sum length of encoded (.m4a) audio in the current dir, in seconds, using ffmpeg
 find . -maxdepth 1 -iname '*.m4a' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; | paste -sd+ -| bc
+
+# Extract the center channel from a 5.1 channel file
+ls *_5.1ch.wav | xargs -P 5 -I % ffmpeg -i % -map_channel 0.0.2  %.center.wav
