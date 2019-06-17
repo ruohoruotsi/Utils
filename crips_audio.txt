@@ -10,8 +10,11 @@ $ ls *.m4a | xargs -P 5 -I % ffmpeg -ss 0 -to 3000  -i % -ac 1 -ar 16000 %.wav
 # ditto, but different time-range (900,1800) and rename file more descriptively
 $ ls *.wav | xargs -P 5 -I % ffmpeg -ss 900 -to 1800  -i % -ac 1 %.trim.mono.wav
 
+# ditto, but nasty .wma audio from an ancient Dell
+for file in *.wma; do ffmpeg -i "${file}"  -acodec libmp3lame -ab 192k "${file/.wma/.mp3}"; done
 
-# Demux video from audio, with a wierd name (so specifiy '--' to indicate end-of-options)
+
+# Demux video from audio, with a weird/invalid name (so specifiy '--' to indicate end-of-options)
 $ ffmpeg -i -5KQ66BBWC4.mkv -vn -- out.wav
 
 
