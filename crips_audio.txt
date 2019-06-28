@@ -25,5 +25,10 @@ $ soxi -D *.wav | awk '{SUM += $1} END { printf "%d:%d:%d\n",SUM/3600,SUM%3600/6
 # Sum length of encoded (.m4a) audio in the current dir, in seconds, using ffmpeg
 find . -maxdepth 1 -iname '*.m4a' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; | paste -sd+ -| bc
 
-# Extract the center channel from a 5.1 channel file
+# Extract the center channel from a 5.1 channel file <--- this is just one dodgy way, that perhaps uses pan?
 ls *_5.1ch.wav | xargs -P 5 -I % ffmpeg -i % -map_channel 0.0.2  %.center.wav
+
+# 3 different ways to extract the center channel
+ffmpeg -i input.wav -af "pan=mono|c0=c2" center.wav
+ffmpeg -i in.wav -map_channel 0.0.2 center.wav
+ffmpeg -i in.wav -filter_complex 'channelsplit=channel_layout=5.1:channels=FC[FC]' -map '[FC]' center.wav
