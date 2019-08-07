@@ -6,8 +6,7 @@ $ ssh-add -K ~/.ssh/id_rsa_github
 # remove annoying files from repo
 $ find . -name '.DS_Store' -type f -delete
 $ find . -name '*.pyc' -delete
-$ find . -type d -name "__pycache__" -delete
-
+$ find . -type d -name __pycache__ -exec rm -r {} \+
 
 # find all files like this and cat them (argument list too long with plain `cat`)
 find . -type f -name  "*.ranges.txt" -exec cat {} >> all.txt \;
