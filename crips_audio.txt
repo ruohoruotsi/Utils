@@ -47,5 +47,10 @@ ffmpeg -i in.wav -filter_complex 'channelsplit=channel_layout=5.1:channels=FC[FC
 
 
 # randomly select 8 audio files and copy them elsewhere: uniform sampling baby! 
-# shuf -zn8 -e *.wav |  xargs -0 cp -vt /target/directory/here
-shuf -zn8 -e *.wav |  xargs -0 cp -vt ..
+shuf -zn8 -e *.wav |  xargs -0 cp -vt /target/directory/here
+
+# good if copy file list is short enough
+cp `find . -name "*.wav" | shuf -n8` .. 
+
+# The overall winner for REALLY big file dirs 
+find . -name "*.wav" | shuf -n8 |  xargs -d '\n' cp -vt .. works best
