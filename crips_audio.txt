@@ -44,3 +44,8 @@ ls *_5.1ch.wav | xargs -P 5 -I % ffmpeg -i % -map_channel 0.0.2  %.center.wav
 ffmpeg -i input.wav -af "pan=mono|c0=c2" center.wav
 ffmpeg -i in.wav -map_channel 0.0.2 center.wav
 ffmpeg -i in.wav -filter_complex 'channelsplit=channel_layout=5.1:channels=FC[FC]' -map '[FC]' center.wav
+
+
+# randomly select 8 audio files and copy them elsewhere: uniform sampling baby! 
+# shuf -zn8 -e *.wav |  xargs -0 cp -vt /target/directory/here
+shuf -zn8 -e *.wav |  xargs -0 cp -vt ..
