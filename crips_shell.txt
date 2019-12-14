@@ -12,3 +12,10 @@ $ find . -type d -name __pycache__ -exec rm -r {} \+
 find . -type f -name  "*.ranges.txt" -exec cat {} >> all.txt \;
 
 
+# rename files en-masse (like for merging multiple training/test splits
+# slow
+for i in *; do mv "$i" aa."$i"; done
+
+# parallel
+find *.png | xargs -n2 -I {} mv {} aa.{}
+ls | xargs -n16 -I {} mv {} aa.{}
