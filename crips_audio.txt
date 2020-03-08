@@ -54,3 +54,8 @@ cp `find . -name "*.wav" | shuf -n8` ..
 
 # The overall winner for REALLY big file dirs 
 find . -name "*.wav" | shuf -n8 |  xargs -d '\n' cp -vt .. works best
+
+
+##################################################################################################
+# Video do upscaling - mafonso's command line: 
+ffmpeg -i sintel_trailer-480p.mp4 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mp4
