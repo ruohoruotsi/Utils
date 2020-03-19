@@ -59,3 +59,6 @@ find . -name "*.wav" | shuf -n8 |  xargs -d '\n' cp -vt .. works best
 ##################################################################################################
 # Video do upscaling - mafonso's command line: 
 ffmpeg -i sintel_trailer-480p.mp4 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mp4
+
+# upscaling + original audio + de-interlacing filter
+ffmpeg -y -i Hollis_P_Monroe_I_Wept_For_You_FINAL_EXPORT.mov -acodec copy -vf yadif -c:v libx264 -preset slow -crf 19 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mov
