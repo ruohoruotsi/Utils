@@ -60,9 +60,11 @@ find . -name "*.wav" | shuf -n8 |  xargs -d '\n' cp -vt .. works best
 # Video do upscaling - mafonso's command line: 
 ffmpeg -i sintel_trailer-480p.mp4 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mp4
 
-# upscaling + original audio + de-interlacing filter
-ffmpeg -y -i Hollis_P_Monroe_I_Wept_For_You_FINAL_EXPORT.mov -acodec copy -vf yadif -c:v libx264 -preset slow -crf 19 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mov
+# -y to overwrite file, -pix_fmt to make it Quicktime compatible, -acodec copy to leave audio alone
+ffmpeg -y -i Ruoho_Ruotsi_Pour_Autant.mov  -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 -pix_fmt yuv420p -acodec copy sintel_1080p.mov
 
+# -y to overwrite file, -pix_fmt to make it Quicktime compatible, -acodec copy to leave audio alone + de-interlacing filter
+ffmpeg -y -i Ruoho_Ruotsi_Pour_Autant.mov  -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 -pix_fmt yuv420p -acodec copy -vf yadif -c:v libx264 -preset slow -crf 19  sintel_1080p.mov
 
 # allegedly upscale (no lanczos) and letterbox:
 ffmpeg -i input.mp4 -vf "scale=(iw*sar)*min(1280/(iw*sar)\,720/ih):ih*min(1280/(iw*sar)\,720/ih), pad=1280:720:(1280-iw*min(1280/iw\,720/ih))/2:(720-ih*min(1280/iw\,720/ih))/2" output.mp4
