@@ -62,3 +62,7 @@ ffmpeg -i sintel_trailer-480p.mp4 -sws_flags lanczos+accurate_rnd+print_info -st
 
 # upscaling + original audio + de-interlacing filter
 ffmpeg -y -i Hollis_P_Monroe_I_Wept_For_You_FINAL_EXPORT.mov -acodec copy -vf yadif -c:v libx264 -preset slow -crf 19 -sws_flags lanczos+accurate_rnd+print_info -strict -1 -s:v 1920x1080 sintel_1080p.mov
+
+
+# allegedly upscale (no lanczos) and letterbox:
+ffmpeg -i input.mp4 -vf "scale=(iw*sar)*min(1280/(iw*sar)\,720/ih):ih*min(1280/(iw*sar)\,720/ih), pad=1280:720:(1280-iw*min(1280/iw\,720/ih))/2:(720-ih*min(1280/iw\,720/ih))/2" output.mp4
