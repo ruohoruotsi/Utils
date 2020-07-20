@@ -19,3 +19,9 @@ for i in *; do mv "$i" aa."$i"; done
 # parallel
 find *.png | xargs -n2 -I {} mv {} aa.{}
 ls | xargs -n16 -I {} mv {} aa.{}
+
+
+
+# Replace (on MacOS/Darwin) spaces in long list of files, so say it doesn't choke on ffmpeg.
+# Don't use *nix rename, which isn't available by default on Darwin
+for f in *; do mv "$f" `echo $f | tr ' ' '_'`; done
