@@ -68,3 +68,10 @@ ffmpeg -y -i Ruoho_Ruotsi_Pour_Autant.mov  -sws_flags lanczos+accurate_rnd+print
 
 # allegedly upscale (no lanczos) and letterbox:
 ffmpeg -i input.mp4 -vf "scale=(iw*sar)*min(1280/(iw*sar)\,720/ih):ih*min(1280/(iw*sar)\,720/ih), pad=1280:720:(1280-iw*min(1280/iw\,720/ih))/2:(720-ih*min(1280/iw\,720/ih))/2" output.mp4
+
+
+
+##################################################################################################
+# Convert a Plex style TV Show directory tree of MKVs, but remap to excise the first audio stream (0:1) while
+# keeping the second (0:2) as well as the subtitles
+$ for i in */*.mkv;    do ffmpeg -i "$i"  -map 0:0 -map 0:2 -map 0:4? -acodec copy -vcodec copy "${i##*/}"; done
