@@ -20,6 +20,17 @@ for file in *.wma; do ffmpeg -i "${file}"  -acodec libmp3lame -ab 192k "${file/.
 # Demux video from audio, with a weird/invalid name (so specifiy '--' to indicate end-of-options)
 $ ffmpeg -i -5KQ66BBWC4.mkv -vn -- out.wav
 
+# Demux video from audio, splitting each audio stream into a separate file with map
+$ ffmpeg -i input.mov -vn \
+  -map 0:0 -c copy wav0.wav \
+  -map 0:1 -c copy wav1.wav \
+  -map 0:2 -c copy wav2.wav \
+  -map 0:3 -c copy wav3.wav \
+  -map 0:4 -c copy wav4.wav \
+  -map 0:5 -c copy wav5.wav \
+  -map 0:6 -c copy wav6.wav \
+  -map 0:7 -c copy wav7.wav
+
 
 ##################################################################################################
 # SUMMING AUDIO IN A DIRECTORY
