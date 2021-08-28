@@ -28,13 +28,6 @@ fi
 PATH=${PATH}:/opt/local/bin:~/dev/Android/android-sdk-macosx/platform-tools:~/dev/Android/android-sdk-macosx/tools:~/dev/Android/android-ndk-r9b 
 PATH=/usr/local/git/bin:${PATH}
 
-# added by Anaconda 1.9.1 installer
-export PATH="/Users/iorif/anaconda/bin:$PATH"
-export PATH="//anaconda/bin:$PATH"
-
-
-
-
 # must use double-quotes when calling a shell variable
 # export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 
@@ -62,4 +55,4 @@ alias rm='rm -i'
 alias df='df -h'
 alias du='du -h'
 alias mkdir='mkdir -p'
-
+alias rmds="find . -name '.DS_Store' -type f -delete"
