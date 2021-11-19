@@ -8,8 +8,14 @@ echo ""
 MYNAME='iroro'
 export MYNAME
 
-
+# prompts
 PS1="iroro:\w$ "
+PS1="\[\e[36m\]iroro\[\e[m\]:\W_\$?}$ "
+# PS1="\[\e[36m\]iroro\e[m\]:\W_\$?}$ "
+# PS1="\[\e[32m\]iroro\e[m\]@\[\e[36m\]\h\[\e[m\]:\W_\$?}$ "
+# PS1='\[\e[01;32m\]iroro\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]$ '
+
+
 
 # Add terminal colors                                                                                                                                                                                  
 export CLICOLOR=1
