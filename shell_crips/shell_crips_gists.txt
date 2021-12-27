@@ -25,3 +25,6 @@ ls | xargs -n16 -I {} mv {} aa.{}
 # Replace (on MacOS/Darwin) spaces in long list of files, so say it doesn't choke on ffmpeg.
 # Don't use *nix rename, which isn't available by default on Darwin
 for f in *; do mv "$f" `echo $f | tr ' ' '_'`; done
+
+# resize an image to 2x, say if you have some minimum image limit for a logo, it iw*2:ih*2 do the scaling, perserving aspect ratio
+$ ffmpeg -i menacing_tree.tiff  -vf scale="iw*2:ih*2" menacing_tree_RC.png
