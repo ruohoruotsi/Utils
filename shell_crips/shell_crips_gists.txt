@@ -11,6 +11,9 @@ $ find . -type d -name __pycache__ -exec rm -r {} \+
 # find all files like this and cat them (argument list too long with plain `cat`)
 find . -type f -name  "*.ranges.txt" -exec cat {} >> all.txt \;
 
+# find out top 20 things taking up disk space
+sudo du -aBM -d 1 . | sort -nr | head -20
+
 
 # rename files en-masse (like for merging multiple training/test splits
 # slow
