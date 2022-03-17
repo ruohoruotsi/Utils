@@ -7,6 +7,9 @@ $ brew install ffmpeg $(brew options ffmpeg --compact)
 # range (0,3000) seconds, downmixing to mono and sample-rate converting to 16kHz
 $ ls *.m4a | xargs -P 5 -I % ffmpeg -ss 0 -to 3000  -i % -ac 1 -ar 16000 %.wav
 
+# Similarly, just convert the sample rate, using 5 cores
+$ $ find . -name "*.wav" |  xargs -P 5 -I % ffmpeg -i %  -ar 16000 %.16k.wav
+
 # Decode AAC, but different time-ranges (900,1800) and rename file more descriptively
 $ ls *.wav | xargs -P 5 -I % ffmpeg -ss 900 -to 1800  -i % -ac 1 %.trim.mono.wav
 
