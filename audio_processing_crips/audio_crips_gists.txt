@@ -19,6 +19,11 @@ $ for file in *.wma; do ffmpeg -i "${file}"  -acodec libmp3lame -ab 192k "${file
 # Decode files from YouTube playlist to mono LPCM @ 16kHz WAV, suitable for training & labeling
 $ for file in *.wav; do sox -- "${file}" -r 16k ./mono/"${file%.*}.mono.16k.wav" remix 1,2; done
 
+# Segment a larger file into smaller ones of fixed size (5 seconds) by providing the segment times
+# and a file pattern, do this for all WAV files in a directory. Good for music, or environmental sounds
+# which are not sensitive to, say speech structure and require a VAD
+$ for file in *.wav; do ffmpeg -i "${file}" -c copy -f segment -segment_times 5,10,15,20,25 "${file}_%d.wav"; done
+
 ##################################################################################################
 
 # Demux video from audio, with a weird/invalid name (so specifiy '--' to indicate end-of-options)
