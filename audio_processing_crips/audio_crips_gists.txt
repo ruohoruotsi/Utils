@@ -17,7 +17,8 @@ $ ls *.wav | xargs -P 5 -I % ffmpeg -ss 900 -to 1800  -i % -ac 1 %.trim.mono.wav
 $ for file in *.wma; do ffmpeg -i "${file}"  -acodec libmp3lame -ab 192k "${file/.wma/.mp3}"; done
 
 # Decode files from YouTube playlist to mono LPCM @ 16kHz WAV, suitable for training & labeling
-$ for file in *.wav; do sox -- "${file}" -r 16k ./mono/"${file%.*}.mono.16k.wav" remix 1,2; done
+$ for file in *.wav; do sox -- "${file}" -r 16k ./mono/"${file%.*}.mono.16k.wav" remix 1,2; done // mixdown
+$ for file in *.wav; do sox -- "${file}" -r 16k "${file%.*}.16k.wav"; done // no mixdown
 
 # Segment a larger file into smaller ones of fixed size (5 seconds) by providing the segment times
 # and a file pattern, do this for all WAV files in a directory. Good for music, or environmental sounds
