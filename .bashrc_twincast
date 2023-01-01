@@ -1,0 +1,52 @@
+#
+# productivity mods - 2022-12-31
+#
+
+echo -n "Uptime: "; uptime
+echo ""
+
+MYNAME='iroro'
+export MYNAME
+
+# prompts
+# PS1="\[\e[36m\]iroro\e[m\]:\W_\$?}$ "
+#PS1="\[\e[32m\]iroro\e[m\]@\[\e[36m\]\h\[\e[m\]:\W_\$?}$ "
+#PS1='\[\e[01;32m\]iroro\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]$ '
+PS1="\[\e[01;32m\]iroro\[\e[m\]@\[\e[36m\]\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]:_\$?}$ "
+
+# Add terminal colors
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Tell grep to highlight matches                                                                                                                                            export GREP_OPTIONS='--color=auto'
+
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
+# Add CUDA etc to path
+PATH=/usr/local/cuda/bin:${PATH}
+
+# export LESS='-M'
+export HISTSIZE=10000  # 500 is default, 0 will disable history
+export HISTFILESIZE=1000000
+export HISTTIMEFORMAT='%b %d %I:%M %p '
+#export HISTCONTROL=ignoredups
+#export HISTCONTROL=ignorespace
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="history:pwd:ls:ls -la:ll"
+
+alias ls='ls -GFh'
+alias ll='ls -lahG'
+alias home='cd ~'
+alias up='cd ..'
+alias h='history'
+
+# can also redefine a command to add options
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias df='df -h'
+alias du='du -h'
+alias mkdir='mkdir -p'
+alias rmds="find . -name '.DS_Store' -type f -delete"
