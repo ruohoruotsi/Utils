@@ -9,9 +9,6 @@ MYNAME='iroro'
 export MYNAME
 
 # prompts
-# PS1="\[\e[36m\]iroro\e[m\]:\W_\$?}$ "
-#PS1="\[\e[32m\]iroro\e[m\]@\[\e[36m\]\h\[\e[m\]:\W_\$?}$ "
-#PS1='\[\e[01;32m\]iroro\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]$ '
 PS1="\[\e[01;32m\]iroro\[\e[m\]@\[\e[36m\]\h\[\e[m\]:\[\e[01;34m\]\w\[\e[m\]:_\$?}$ "
 
 # Add terminal colors
@@ -26,6 +23,12 @@ fi
 
 # Add CUDA etc to path
 PATH=/usr/local/cuda/bin:${PATH}
+
+# set PATH for cuda 11.7 installation
+if [ -d "/usr/local/cuda-11.7/bin/" ]; then
+    export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
 
 # export LESS='-M'
 export HISTSIZE=10000  # 500 is default, 0 will disable history
