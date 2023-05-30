@@ -1,6 +1,8 @@
 #
 # productivity mods - 2022-12-31
 #
+# If not running interactively, don't do anything
+[[ $- == *i* ]] || return
 
 echo -n "Uptime: "; uptime
 echo ""
