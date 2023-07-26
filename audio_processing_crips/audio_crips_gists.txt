@@ -111,3 +111,19 @@ $ for file in *.wav; do sox -- "${file}" -r 16k ./mono/"${file%.*}.mono.16k.wav"
 ffmpeg -i M.left.wav -i M.right.wav -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map "[a]" M.2ch.wav
 ffmpeg -i M.2ch.wav -i E.2ch.wav -filter_complex amix=inputs=2:duration=first BG.2ch.wav
 
+
+
+##################################################################################################
+##################################################################################################
+# pyscenedetect setup, under py3.9.11, Intel MBP, MacOS Catalina 
+##################################################################################################
+
+# in a venv, install dependencies and pyscenedetect
+$ pip install opencv-contrib-python
+$ pip install scenedetect
+
+# remove time-code stream =>  Stream #0:2(eng): Data: none (tmcd / 0x64636D74)
+$ ffmpeg -i Striders_Tyrants_720p.mp4  -c:v copy  -write_tmcd false  Striders_Tyrants_720p_output.mp4
+$ scenedetect -i Striders_Tyrants_720p.mp4 -v debug split-video
+
+##################################################################################################
