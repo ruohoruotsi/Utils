@@ -105,12 +105,11 @@ $ for file in *.wav; do sox -- "${file}" -r 16k ./mono/"${file%.*}.mono.16k.wav"
 
 ##################################################################################################
 # Given D,M,E stems of the form {Dialogue.L.wav, Dialogue.R.wav}, {Music.L.wav, Music.R.wav}, {Effects.L.wav, Effects.R.wav}
-# Use merge to combine them into stereo stems, then use amix to turn Dialogure into FG and M,E stems into BG, for a
-# clean FG, BG pair
+# (1) Use merge to combine them into stereo stems, then
+# (2) Use amix to turn Dialogue into FG and M,E stems into BG, for a clean FG, BG pair
 
 ffmpeg -i M.left.wav -i M.right.wav -filter_complex "[0:a][1:a]amerge=inputs=2[a]" -map "[a]" M.2ch.wav
 ffmpeg -i M.2ch.wav -i E.2ch.wav -filter_complex amix=inputs=2:duration=first BG.2ch.wav
-
 
 
 ##################################################################################################
@@ -127,3 +126,6 @@ $ ffmpeg -i Striders_Tyrants_720p.mp4  -c:v copy  -write_tmcd false  Striders_Ty
 $ scenedetect -i Striders_Tyrants_720p.mp4 -v debug split-video
 
 ##################################################################################################
+# YorubaVoice QC: make a sequence of files from 1 - 20,000. zfill the numbers to be 5 digits long
+# then pipe to xargs to list the file with a .wav attachment, count how many fail to be listed
+seq -f "%05g" 1 20000 | xargs -I {} ls {}.wav >/dev/null
