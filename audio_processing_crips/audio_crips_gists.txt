@@ -129,3 +129,10 @@ $ scenedetect -i Striders_Tyrants_720p.mp4 -v debug split-video
 # YorubaVoice QC: make a sequence of files from 1 - 20,000. zfill the numbers to be 5 digits long
 # then pipe to xargs to list the file with a .wav attachment, count how many fail to be listed
 seq -f "%05g" 1 20000 | xargs -I {} ls {}.wav >/dev/null
+
+
+#########################################################################################################
+# Setup music library with metadata taggable lossless FLAC, transcode everything the move WAVs to dump
+#########################################################################################################
+find . -name "*.wav" -exec sh -c 'ffmpeg -y -i "$1" -c:a flac "${1%.*}.flac" -hide_banner' sh {} \;
+find . -name "*.wav" -exec cp {} /Volumes/RR/WAV_dump/ \;
