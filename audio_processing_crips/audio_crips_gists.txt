@@ -136,3 +136,12 @@ seq -f "%05g" 1 20000 | xargs -I {} ls {}.wav >/dev/null
 #########################################################################################################
 find . -name "*.wav" -exec sh -c 'ffmpeg -y -i "$1" -c:a flac "${1%.*}.flac" -hide_banner' sh {} \;
 find . -name "*.wav" -exec cp {} /Volumes/RR/WAV_dump/ \;
+
+
+#########################################################################################################
+# use ffmpeg to sidechain a background signal w/ a foreground/speech one, write a new mix of
+# gain-adjusted bg + foreground
+#########################################################################################################
+$ ffmpeg -y -i Troll_nb_2_BG.wav -i Troll_nb_2_FG.wav -filter_complex "[1:a]asplit=2[sc][mix];\
+    [0:a][sc]sidechaincompress=threshold=0.01:ratio=6:level_sc=1.0:release=500:attack=1[compr];\
+    [compr][mix]amix" sidechain_ratio6.wav
