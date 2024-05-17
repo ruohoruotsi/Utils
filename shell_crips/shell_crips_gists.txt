@@ -42,3 +42,6 @@ git pull origin master -X theirs
 # Filter out colums of dir of CSVs, to simplify an overly complicated CSV, by using awk, redirect to a file
 $ cat *.output.csv | awk -F',' '{print $5}'
 $ cat *.output.csv | awk -F',' '{print $5}' > all_pngs.txt
+
+# multiple columns, separated by a tab in the output OFS
+$ bat results.csv | awk 'BEGIN{FS=",";OFS="\t"} {print $6, $7,$21}'
