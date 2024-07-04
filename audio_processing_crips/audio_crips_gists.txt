@@ -155,3 +155,10 @@ $ ffmpeg -y -i Troll_nb_2_BG.wav -i Troll_nb_2_FG.wav -filter_complex "[1:a]aspl
 # because few CPU architectures support 24-bit integer formats. 
 
 ffmpeg -i input_pcm_f32le.wav -sample_fmt s32 -c:a pcm_s24le  output_pcm_s24le.wav
+
+#########################################################################################################
+# demux (remove) audio from video file, without loss of fidelity. Re-mux new soundtrack to video_only file 
+# use -shortest to trim (longer) audio to the final-cut-video-length
+ffmpeg -i input_av.mp4 -vcodec copy -an output_video_only.mp4
+
+ffmpeg -i output_video_only.mp4 -i new_soundtrack_20240701.wav -c:v copy -c:a aac -b:a 256k -shortest output_av_new_soundtrack_20240701.mp4
