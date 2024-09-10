@@ -45,3 +45,10 @@ $ cat *.output.csv | awk -F',' '{print $5}' > all_pngs.txt
 
 # multiple columns, separated by a tab in the output OFS
 $ bat results.csv | awk 'BEGIN{FS=",";OFS="\t"} {print $6, $7,$21}'
+
+
+# python regex biz for AWS paths
+aws://beloaved-fest-hemp/dokmot/output/30a26080-928c-44a2-8491-0c1b568fe9b2/output.wav
+
+String regex = /^aws:\/\/beloaved-fest-hemp\/dokmot\/output\/(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\/output\.wav$/
+assert "somedata" ==~ regex
