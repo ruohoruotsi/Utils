@@ -1,0 +1,27 @@
+$ uv venv --python 3.12
+$ CPPFLAGS="-I/opt/local/include" LDFLAGS="-L/opt/local/lib"  uv pip install "coldtype[viewer, audio]"
+$ uv run ct classes/02/rr.py -ea 1
+
+$ uv sync --extra fx
+$ uv sync --extra viewer
+$ uv run ct examples/animations/ -ea 1
+
++#invoke with (typesoundcode-feb2025) iroro:~/github/typesoundcode.feb2025:_0}$ uv run ct classes/02/rr.py 
++# hit "." key to see "rr.py/audio" in the title window, then audio should work in the viewer window
++# $ uv run ct classes/02/rr.py -ea 1
+
+
+return txt, Style(Font.RecursiveMono(), 22)
+
+from coldtype.fx.skia import phototype
+        StSt("BG", Font.MuSan(), 250, wght=1, wdth=0)
+            .f(1)
+            .align(r)
+            .ch(phototype(r, blur=3, cutw=30)))
+
+* `tracking` (aka `tu`): set the tracking, by default **in font-source-point-size** aka as if the font-size was always 1000; this means tracking is by default done relatively rather than absolutely (aka the relative tracking will not change when you change the font_size)
+
+Pexels video idea:
+you could use a grayscale mask in davinci, put a threshold on the video layer so the darker bits go to zero, and anything lighter goes to white
+
+use that to mask a coldtype renders
