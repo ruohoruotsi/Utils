@@ -24,6 +24,9 @@ find *.png | xargs -n2 -I {} mv {} aa.{}
 ls | xargs -n16 -I {} mv {} aa.{}
 
 
+# Automatically collate 3 PNG files into 1 from a big directory of files:
+for file in  v1_png/*.png; do convert "${file}" ./v2_silero_png/"${file##*/}" ./v2_smad_png/"${file##*/}" -append ./3Plot_VAD_summaries/"${file##*/}.3Plots.png" ; done
+
 
 # Replace (on MacOS/Darwin) spaces in long list of files, so say it doesn't choke on ffmpeg.
 # Don't use *nix rename, which isn't available by default on Darwin
@@ -34,3 +37,18 @@ $ ffmpeg -i menacing_tree.tiff  -vf scale="iw*2:ih*2" menacing_tree_RC.png
 
 # merge in changes from master while accepting them all new changes (i.e. theirs)
 git pull origin master -X theirs
+
+
+# Filter out colums of dir of CSVs, to simplify an overly complicated CSV, by using awk, redirect to a file
+$ cat *.output.csv | awk -F',' '{print $5}'
+$ cat *.output.csv | awk -F',' '{print $5}' > all_pngs.txt
+
+# multiple columns, separated by a tab in the output OFS
+$ bat results.csv | awk 'BEGIN{FS=",";OFS="\t"} {print $6, $7,$21}'
+
+
+# python regex biz for AWS paths
+aws://beloaved-fest-hemp/dokmot/output/30a26080-928c-44a2-8491-0c1b568fe9b2/output.wav
+
+String regex = /^aws:\/\/beloaved-fest-hemp\/dokmot\/output\/(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\/output\.wav$/
+assert "somedata" ==~ regex
